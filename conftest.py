@@ -1,0 +1,15 @@
+import pytest
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+
+@pytest.fixture
+def driver():
+    options = Options()
+    options.add_argument("--start-maximized")
+
+    # Selenium will automatically handle ChromeDriver
+    driver = webdriver.Chrome(options=options)
+
+    yield driver
+    driver.quit()

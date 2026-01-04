@@ -1,12 +1,11 @@
+# cart_page.py
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 
 class CartPage(BasePage):
-    PROCEED_TO_CHECKOUT = (By.CSS_SELECTOR, "a.button-medium[title='Proceed to checkout']")
-    CART_SUMMARY = (By.ID, "cart_summary")
+    # Locator for the first item Remove button
+    FIRST_ITEM_REMOVE_BUTTON = (By.CSS_SELECTOR, "button[data-test^='remove-']")
 
-    def proceed_to_checkout(self):
-        self.click(self.PROCEED_TO_CHECKOUT)
-
-    def is_product_in_cart(self):
-        return "Product" in self.get_text(self.CART_SUMMARY)
+    def remove_first_item(self):
+        """Click the Remove button for the first item in the cart."""
+        self.click(self.FIRST_ITEM_REMOVE_BUTTON)
