@@ -7,7 +7,10 @@ class CheckoutPage(BasePage):
     ZIP_CODE = (By.ID, "postal-code")
     CONTINUE = (By.ID, "continue")
     FINISH = (By.ID, "finish")
-
+    CHECKOUT_ITEMS = (By.CLASS_NAME, "cart_item")
+    
+    def get_items_count(self):
+        return len(self.driver.find_elements(*self.CHECKOUT_ITEMS))
     def fill_info(self, first, last, zip_code):
         self.type(self.FIRST_NAME, first)
         self.type(self.LAST_NAME, last)

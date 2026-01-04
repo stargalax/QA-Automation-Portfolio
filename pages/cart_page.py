@@ -1,11 +1,14 @@
-# cart_page.py
+# pages/cart_page.py
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 
 class CartPage(BasePage):
-    # Locator for the first item Remove button
-    FIRST_ITEM_REMOVE_BUTTON = (By.CSS_SELECTOR, "button[data-test^='remove-']")
+    CHECKOUT_BUTTON = (By.ID, "checkout")
 
-    def remove_first_item(self):
-        """Click the Remove button for the first item in the cart."""
-        self.click(self.FIRST_ITEM_REMOVE_BUTTON)
+    def is_cart_empty(self):
+        items = self.driver.find_elements(By.CLASS_NAME, "cart_item")
+        return len(items) == 0
+
+    def checkout_button_disabled(self):
+        button = self.find_element(self.CHECKOUT_BUTTON)
+        return not button.is_enabled()
